@@ -5,7 +5,11 @@
 
 using namespace std;
 
-int main() {
-    
-    return 0;
+int main()
+{
+	User user = User();
+	user.ListOfUsers.push_back(user.CreateAccount());
+	user.ListOfUsers.push_back(user.CreateAccount());
+	cout << endl << user.ListOfUsers.front().GetUsername() << endl;
+	user.ChangeUsername();
 }
