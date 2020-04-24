@@ -148,6 +148,8 @@ using namespace std;
 
 	void User::LogOff() {
 		LoggedOn = false;
+		(*LoggedAccount).username = nullptr;
+		(*LoggedAccount).password = nullptr;
 	}
 
 	list<User>::iterator User::FindAccount(string uname, string pass) {
