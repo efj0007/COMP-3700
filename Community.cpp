@@ -43,7 +43,7 @@ void Community::ListCommunities() {
 
 void Community::JoinCommunity() {
 	string ComName;
-	Community Community;
+	list<Community>::iterator Comm;
 	while (true) {
 		cout << "Name the community you wish to join ";
 		cin >> ComName;
@@ -52,8 +52,8 @@ void Community::JoinCommunity() {
 		}
 		cout << "Sorry that community doesn't exist try again" << endl;
 	}
-	Community = (*FindCommunity(ComName));
-	Community.ListOfComUsers.push_back(*LoggedAccount);
+	Comm = FindCommunity(ComName);
+	(*Comm).ListOfComUsers.push_back(*LoggedAccount);
 }
 
 list<Community>::iterator Community::FindCommunity(string ComName) {
