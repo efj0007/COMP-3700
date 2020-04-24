@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
 #include <list>
+
 using namespace std;
+
 class User
 {
 
@@ -11,7 +13,7 @@ public:
 	string GetUsername();
 	string GetPassword();
 	string GetEmail();
-	User CreateAccount();
+	void CreateAccount();
 	void ChangePass();
 	void ChangeUsername();
 	void ChangeEmail();
@@ -25,6 +27,6 @@ public:
 	string password;
 	string email;
 	bool LoggedOn = false;
-	list<User>::iterator LoggedAccount;
 	list<User> ListOfUsers; //Simulates Nitrox Database that stores all users/userinfo
 };
+extern list<User>::iterator LoggedAccount; //Declares this as a global variable across all files since Both User and Community classes require this.

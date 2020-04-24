@@ -1,8 +1,7 @@
 #include <iostream>
 #include <list>
 #include <string>
-#include "C:/Users/xxcha/source/repos/Nitrox/user.h"
-
+#include "user.h"
 
 using namespace std;
 
@@ -28,7 +27,7 @@ using namespace std;
 		return User::email;
 	}
 
-	User User::CreateAccount() {
+	void User::CreateAccount() {
 		
 		string uname, pass, vPass, mail;
 		do {
@@ -50,7 +49,7 @@ using namespace std;
 			cout << "Enter an email" << endl;
 			cin >> mail;
 		} while (!IsInputValid("Email", mail));
-		return User(uname, pass, mail);
+		ListOfUsers.push_back(User(uname, pass, mail));
 	}
 
 	void User::ChangeUsername() {
