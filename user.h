@@ -1,8 +1,7 @@
+#pragma once
 #include <string>
-#include <iostream>
-
-using namespace std; 
-
+#include <list>
+using namespace std;
 class User
 {
 
@@ -18,10 +17,14 @@ public:
 	void ChangeEmail();
 	bool IsInputValid(string CheckParam, string UserInfo);
 	void Login();
-	void CheckUseAndPass(string uname, string pass);
+	list<User>::iterator FindAccount(string uname, string pass);
+	bool IsAccountFound(string uname, string pass);
+	void LogOff();
 public:
 	string username;
 	string password;
 	string email;
-	list<User> ListOfUsers;
+	bool LoggedOn = false;
+	list<User>::iterator LoggedAccount;
+	list<User> ListOfUsers; //Simulates Nitrox Database that stores all users/userinfo
 };
