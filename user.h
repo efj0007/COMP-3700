@@ -5,6 +5,8 @@
 
 using namespace std;
 
+//Creates all of the functions and class variables for th User class
+
 class User
 {
 
@@ -24,6 +26,7 @@ public:
 	bool IsAccountFound(string uname, string pass);
 	void LogOff();
 	bool LogOn();
+
 public:
 	string username;
 	string password;
@@ -31,4 +34,5 @@ public:
 	bool LoggedOn = false;
 	list<User> ListOfUsers; //Simulates Nitrox Database that stores all users/userinfo
 };
-extern list<User>::iterator LoggedAccount; 
+
+extern list<User>::iterator LoggedAccount; //Global Variable for all classes

@@ -5,33 +5,43 @@
 
 using namespace std;
 
-	User::User() {
+	User::User() 
+	{
 	//Default Constructor for intiailization
 	}
+
 	//Constructor
-	User::User(string uname, string psswrd, string mail) {
+	User::User(string uname, string psswrd, string mail) 
+	{
 		username = uname;
 		password = psswrd;
 		email = mail;
 	}
 
-	string User::GetUsername() {
+	//Get logged in user's username
+	string User::GetUsername() 
+	{
 		return username;
 	}
 
-	string User::GetPassword() {
+	//Get logged in user's password
+	string User::GetPassword() 
+	{
 		return password;
 	}
 
-	string User::GetEmail() {
+	//Get logged in user's email
+	string User::GetEmail() 
+	{
 		return email;
 	}
 
 	//Used for creating account
-	void User::CreateAccount() {
-		
+	void User::CreateAccount() 
+	{
 		string uname, pass, vPass, mail;
-		do {
+		do 
+		{
 			cout << "***Account Creation Page***\n" << endl;
 			cout << "Enter a Username: ";
 			cin >> uname;
@@ -42,28 +52,35 @@ using namespace std;
 			cout << "Verify the password: ";
 			cin >> vPass;
 			//Loop until passwords match
-			if (pass == vPass) {
+			if (pass == vPass) 
+			{
 				break;
 			}
 			cout << "\nThe passwords do not match, try again." << endl;
 		}
-		do {
+		do 
+		{
 			cout << "Enter an email: ";
 			cin >> mail;
 		} while (!IsInputValid("Email", mail));
 		ListOfUsers.push_back(User(uname, pass, mail));
 	}
 
-	void User::ChangeUsername() {
-		if (!LoggedOn) {
+	//Change currently logged in user's username
+	void User::ChangeUsername() 
+	{
+		if (!LoggedOn) 
+		{
 			cout << "Please login first." << endl;
 			return;
 		}
 		string uname;
-		while (true) {
+		while (true) 
+		{
 			cout << "Enter the new username: ";
 			cin >> uname;
-				if (IsInputValid("Username", uname)) {
+				if (IsInputValid("Username", uname)) 
+				{
 					break;
 				}
 		}
@@ -72,8 +89,11 @@ using namespace std;
 		cout << "Username successfully changed to " << uname << endl;
 	}
 
-	void User::ChangePass() {
-		if (!LoggedOn) {
+	//Change currently logged in user's password
+	void User::ChangePass() 
+	{
+		if (!LoggedOn) 
+		{
 			cout << "Please login first." << endl;
 			return;
 		}
@@ -83,39 +103,49 @@ using namespace std;
 		(*LoggedAccount).password = pass;
 	}
 
-	void User::ChangeEmail() {
-		if (!LoggedOn) {
+	//Change currently logged in user's email
+	void User::ChangeEmail() 
+	{
+		if (!LoggedOn) 
+		{
 			cout << "Please login first." << endl;
 			return;
 		}
 		string mail;
-		while (true) {
+		while (true) 
+		{
 			cout << "Enter the new email: ";
 			cin >> mail;
-			if (IsInputValid("Email", mail)) {
+			if (IsInputValid("Email", mail)) 
+			{
 				break;
 			}
 		}
-
 		(*LoggedAccount).email = mail;
 		cout << "Email successfully changed to " << mail << endl;
 	}
 
 	//Checks to see if Username/Email is taken
-	bool User::IsInputValid(string CheckParam, string UserInfo) {
-		if (ListOfUsers.empty()) {
+	bool User::IsInputValid(string CheckParam, string UserInfo) 
+	{
+		if (ListOfUsers.empty()) 
+		{
 			return true;
 		}
 		list<User>::iterator it = ListOfUsers.begin();
-		do  {
+		do  
+		{
 			if (CheckParam == "Username") {
-				if (UserInfo == (*it).GetUsername()) {
+				if (UserInfo == (*it).GetUsername()) 
+				{
 					cout << "Username " << UserInfo << " already in use." << endl;
 					return false;
 				}
 			}
-			if (CheckParam == "Email") {
-				if (UserInfo == (*it).GetEmail()) {
+			if (CheckParam == "Email") 
+			{
+				if (UserInfo == (*it).GetEmail()) 
+				{
 					cout << "Email " << UserInfo << " is already registered" << endl;
 					return false;
 				}
@@ -125,17 +155,20 @@ using namespace std;
 		return true;
 	}
 
-	void User::Login() {
+	//Login based off user's input of credentials
+	void User::Login() 
+	{
 		int Attempts = 0, MaxAttempts = 5;
-
 		string uname, pass, mail;
-		while (Attempts < MaxAttempts) {
+		while (Attempts < MaxAttempts) 
+		{
 			cout << "\n***Login Page***\n" << endl;
 			cout << "Enter your username: ";
 			cin >> uname;
 			cout << "Enter your password: ";
 			cin >> pass;
-			if (IsAccountFound(uname, pass)) {
+			if (IsAccountFound(uname, pass)) 
+			{
 				cout << "\nLogin Sucessful!" << endl;
 				LoggedOn = true;
 				LoggedAccount = FindAccount(uname, pass);
@@ -144,30 +177,35 @@ using namespace std;
 			cout << "Invalid username or password please try again." << endl << endl;
 			Attempts++;
 		}
-		if (Attempts >= MaxAttempts) {
+		if (Attempts >= MaxAttempts) 
+		{
 			cout << "You've exceeded the maximum number of attempts please try again later." << endl;
-			
 		}
 	}
 
-	void User::LogOff() {
-//		(*LoggedAccount).username = nullptr;
-//		(*LoggedAccount).password = nullptr;
-//		(*LoggedAccount).email = nullptr;
+	//Log off the currently logged in user
+	void User::LogOff() 
+	{
 		cout << "Logging out...\n" << endl;
 		LoggedOn = false;
-
 	}
 
-	bool User::LogOn() {
+	//Check to see if someone is currently logged in
+	bool User::LogOn() 
+	{
 		return LoggedOn;
 	}
 
-	list<User>::iterator User::FindAccount(string uname, string pass) {
+	//Search the ListOfUsers for a specific account and return the user
+	list<User>::iterator User::FindAccount(string uname, string pass) 
+	{
 		list<User>::iterator it = ListOfUsers.begin();
-		do {
-			if (uname == (*it).GetUsername()) {
-				if (pass == (*it).GetPassword()) {
+		do 
+		{
+			if (uname == (*it).GetUsername()) 
+			{
+				if (pass == (*it).GetPassword()) 
+				{
 					return it;
 				}
 			}
@@ -177,12 +215,16 @@ using namespace std;
 		return it;
 	}
 
-	bool User::IsAccountFound(string uname, string pass) {
+	//Search the ListOfUsers to see if the username already exists
+	bool User::IsAccountFound(string uname, string pass) 
+	{
 		list<User>::iterator Account = FindAccount(uname, pass);
-		if (Account == ListOfUsers.end()) {
+		if (Account == ListOfUsers.end()) 
+		{
 			return false;
 		}
-		if ((*Account).GetUsername() == uname) {
+		if ((*Account).GetUsername() == uname) 
+		{
 			return true;
 		}
 		return false;

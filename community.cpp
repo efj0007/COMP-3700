@@ -16,8 +16,9 @@ Community::Community(string Name, int MaxMem, User Owner, bool IsPrivate) {
 	Private = IsPrivate;
 	ListOfComUsers;
 }
-
-void Community::CreateCommunity() {
+//Creates a community from user input
+void Community::CreateCommunity() 
+{
 	string ComName;
 	char PermIn;
 	int MaxMem;
@@ -29,36 +30,45 @@ void Community::CreateCommunity() {
 	cin >> MaxMem;
 	cout << "Do you wish for you community to be private? Type y/n: ";
 	cin >> PermIn;
-	if (PermIn == 'y') {
+	if (PermIn == 'y') 
+	{
 		Perm = true;
 	}
 	ListOfCommunities.push_back(Community(ComName, MaxMem, (Owner), Perm));
 }
-
-void Community::ListCommunities() {
+//Lists all current communities
+void Community::ListCommunities() 
+{
 	int i = 1;
-	if (ListOfCommunities.empty()) {
+	if (ListOfCommunities.empty()) 
+	{
 		cout << "There are currently no available communities" << endl;
 	}
-	else {
+	else 
+	{
 		list<Community>::iterator it = ListOfCommunities.begin();
-		for (it; it != ListOfCommunities.end(); it++) {
+		for (it; it != ListOfCommunities.end(); it++) 
+		{
 			cout << i << ". " << (*it).CommunityName << endl;
 		}
 	}
 }
-
-void Community::JoinCommunity() {
+//Allows the user to join a community
+void Community::JoinCommunity() 
+{
 	string ComName;
 	list<Community>::iterator Comm;
-	if (ListOfCommunities.empty()) {
+	if (ListOfCommunities.empty()) 
+	{
 		cout << "There are currently no available communites" << endl;
 	}
 	else {
-		while (true) {
+		while (true) 
+		{
 			cout << "Name the community you wish to join: ";
 			cin >> ComName;
-			if (FindCommunity(ComName) != ListOfCommunities.end()) {
+			if (FindCommunity(ComName) != ListOfCommunities.end()) 
+			{
 				break;
 			}
 			cout << "Sorry that community doesn't exist" << endl;
@@ -69,10 +79,12 @@ void Community::JoinCommunity() {
 		cout << "You have successfully joined " << ComName << endl;
 	}
 }
-
-list<Community>::iterator Community::FindCommunity(string ComName) {
+//Searches the ListOfCommunities for a specific community
+list<Community>::iterator Community::FindCommunity(string ComName) 
+{
 	list<Community>::iterator it = ListOfCommunities.begin();
-	for (it; it != ListOfCommunities.end(); it++) {
+	for (it; it != ListOfCommunities.end(); it++) 
+	{
 		if ((*it).CommunityName == ComName) {
 			return it;
 		}
